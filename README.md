@@ -8,11 +8,23 @@ Os Arquivos Referentes aos três testes estão nas pastas separadas pelas etapas
 
 # Referênte ao Teste 03
 
-Foi utilizado para realizar a API:
+## Breve Introdução ao problema:
+
+Durante o desenvolvimento desta aplicação, foram identificadas duas entidades principais: Pessoa e Endereço. Cada pessoa pode ter múltiplos endereços cadastrados, sendo apenas um deles designado como principal.
+
+A decisão foi tomada de que o endereço principal seria o primeiro a ser cadastrado, simplificando assim o fluxo de informações na aplicação. Abaixo está o diagrama de classes utilizado para modelar o projeto:
+
+![Diagrama de Classes](./assets/relacionamento.PNG)
+
+Foi estabelecido um relacionamento de um-para-muitos entre as entidades (uma pessoa pode ter vários endereços). Os métodos das classes foram omitidos, pois consistem principalmente em getters e setters padrão, não havendo necessidade de métodos adicionais nessas classes.
+
+Para a implementação da API, foram utilizadas as seguintes tecnologias:
 
 - Java 21;
-- Banco H2, mas testei ele também no PostgreSQL 16;
-- SpringBoot 3.2.5
+- Banco de dados H2, com testes também realizados no PostgreSQL 16;
+- Framework Spring Boot 3.2.5.
+
+Foi optado o uso do banco H2 para facilitar na avaliação da solução.
 
 ## Instruções 
 
@@ -159,4 +171,5 @@ Alguns pontos para um futuro melhoramento:
 
 1. Adicionar uma classe para o tratamento de erros, não deixando os erros gerados deixem expor o uso do springboot para o usuário;
 2. Elaboração de testes unitários para melhorar a robustes da aplicação;
-3. Criação de um container docker para facilitar um futuro deploy;
+3. Utilização de API externa para a validação do endereço das pessoas, como o via Cep;
+4. Criação de um container docker para facilitar um futuro deploy;
