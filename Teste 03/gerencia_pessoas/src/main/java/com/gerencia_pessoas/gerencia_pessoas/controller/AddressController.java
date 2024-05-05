@@ -16,6 +16,7 @@ import com.gerencia_pessoas.gerencia_pessoas.model.dto.request.AddressRequestDto
 import com.gerencia_pessoas.gerencia_pessoas.model.dto.response.AddressResponseDto;
 import com.gerencia_pessoas.gerencia_pessoas.service.AddressService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +31,13 @@ public class AddressController {
 
     @PatchMapping("/person/{uuid}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addNewAddressToPerson(@PathVariable UUID uuid, @RequestBody List<AddressRequestDto> addresses) {
+    public void addNewAddressToPerson(@PathVariable UUID uuid,@Valid @RequestBody List<AddressRequestDto> addresses) {
         this.addressService.addNewAddressToPerson(uuid, addresses);
     }
 
     @PutMapping("/person/{uuid}/old-cep/{cep}") 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateAddressByUuidAndCep(@PathVariable UUID uuid,@PathVariable String cep, @RequestBody AddressRequestDto newAddressRequestDto) {
+    public void updateAddressByUuidAndCep(@PathVariable UUID uuid,@PathVariable String cep,@Valid @RequestBody AddressRequestDto newAddressRequestDto) {
         this.addressService.updateAddressByUuidAndCep(uuid, cep, newAddressRequestDto);
     }
 

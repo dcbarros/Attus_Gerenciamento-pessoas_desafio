@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +26,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UUID uuid;
+    @NotBlank(message = "O nome do usuário é obrigatório")
     private String name;
+    @Past(message = "A data de nascimento deve ser atribuída a uma data anterior a hoje")
     private LocalDate birthday;
     
     @OneToMany(cascade = CascadeType.ALL)

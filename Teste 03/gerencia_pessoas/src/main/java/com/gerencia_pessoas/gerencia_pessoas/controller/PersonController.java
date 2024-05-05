@@ -9,7 +9,7 @@ import com.gerencia_pessoas.gerencia_pessoas.model.dto.request.PersonUpdateReque
 import com.gerencia_pessoas.gerencia_pessoas.model.dto.response.PersonResponseDto;
 import com.gerencia_pessoas.gerencia_pessoas.service.PersonService;
 
-
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -31,13 +31,13 @@ public class PersonController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void createNewUser(@RequestBody PersonRequestDto request) {
+    public void createNewUser(@Valid @RequestBody PersonRequestDto request) {
         this.personService.createNewPerson(request);
     }
 
     @PutMapping("/{uuid}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePerson(@PathVariable UUID uuid, @RequestBody PersonUpdateRequestDto request) {
+    public void updatePerson(@PathVariable UUID uuid,@Valid @RequestBody PersonUpdateRequestDto request) {
         this.personService.updatePerson(uuid, request);
     }
 
