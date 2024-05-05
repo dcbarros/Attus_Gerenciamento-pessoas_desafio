@@ -14,6 +14,7 @@ import com.gerencia_pessoas.gerencia_pessoas.model.dto.response.AddressResponseD
 import com.gerencia_pessoas.gerencia_pessoas.repository.AddressRepository;
 import com.gerencia_pessoas.gerencia_pessoas.repository.PersonRepository;
 import com.gerencia_pessoas.gerencia_pessoas.service.AddressService;
+import com.gerencia_pessoas.gerencia_pessoas.utils.CepUtils;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,10 @@ public class AddressImpl implements AddressService{
 
     @Override
     public void updateAddressByUuidAndCep(UUID uuid, String cep, AddressRequestDto newAddressRequestDto) {
+        cep = CepUtils.formatCep(cep);
+        if(!CepUtils.isValidCep(cep)) {
+            throw new RuntimeException("CEP fornecido não é válido");
+        }
         Address address = this.addressRepository.findAddressByUuidAndCep(uuid, cep).orElseThrow(() -> new RuntimeException("Endereço não encontrado"));        
         address.setCep(newAddressRequestDto.getCep());
         address.setPublicPlace(newAddressRequestDto.getPublicPlace());
@@ -62,6 +67,10 @@ public class AddressImpl implements AddressService{
 
     @Override
     public AddressResponseDto getAddressByUuidAndCep(UUID uuid, String cep){
+        cep = CepUtils.formatCep(cep);
+        if(!CepUtils.isValidCep(cep)) {
+            throw new RuntimeException("CEP fornecido não é válido");
+        }
         Address address = this.addressRepository.findAddressByUuidAndCep(uuid, cep).orElseThrow(() -> new RuntimeException("Endereço naao encontrado!"));
         return this.modelMapper.map(address, AddressResponseDto.class);
     }
@@ -69,6 +78,10 @@ public class AddressImpl implements AddressService{
     @Override
     @Transactional
     public void updatePrincipalAddressToPersonByUuidAndCep(UUID uuid, String cep) {
+        cep = CepUtils.formatCep(cep);
+        if(!CepUtils.isValidCep(cep)) {
+            throw new RuntimeException("CEP fornecido não é válido");
+        }
         if(this.addressRepository.existsAddressByPersonUuidAndCep(uuid, cep)){
             Person person = this.personRepository.findByUuid(uuid).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
             this.addressRepository.changePrincipalAddressToFalse(uuid);

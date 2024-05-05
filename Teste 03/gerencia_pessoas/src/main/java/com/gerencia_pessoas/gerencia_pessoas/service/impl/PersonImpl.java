@@ -16,6 +16,7 @@ import com.gerencia_pessoas.gerencia_pessoas.model.dto.request.PersonUpdateReque
 import com.gerencia_pessoas.gerencia_pessoas.model.dto.response.PersonResponseDto;
 import com.gerencia_pessoas.gerencia_pessoas.repository.PersonRepository;
 import com.gerencia_pessoas.gerencia_pessoas.service.PersonService;
+import com.gerencia_pessoas.gerencia_pessoas.utils.CepUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +29,10 @@ public class PersonImpl implements PersonService {
     
     @Override
     public void createNewPerson(PersonRequestDto request) {
+        request.getAddress().setCep(CepUtils.formatCep(request.getAddress().getCep()));
+        if(!CepUtils.isValidCep(CepUtils.formatCep(request.getAddress().getCep()))) {
+            throw new RuntimeException("CEP fornecido não é válido");
+        }
         Address address = modelMapper.map(request.getAddress(), Address.class);
         address.setIsPrincipal(true);
         Person person = new Person(request.getName(), request.getBirthday(), Set.of(address));
