@@ -51,7 +51,7 @@ public class PersonImpl implements PersonService {
 
     @Override
     public List<PersonResponseDto> getPersonByName(String name) {
-        return this.personRepository.findByName(name)
+        return this.personRepository.findByNameIgnoreCaseContaining(name)
             .stream()
             .map(person -> this.modelMapper.map(person, PersonResponseDto.class))
             .collect(Collectors.toList());

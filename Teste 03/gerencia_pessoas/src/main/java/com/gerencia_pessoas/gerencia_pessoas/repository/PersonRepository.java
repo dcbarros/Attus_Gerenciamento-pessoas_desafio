@@ -1,6 +1,7 @@
 package com.gerencia_pessoas.gerencia_pessoas.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.gerencia_pessoas.gerencia_pessoas.model.Person;
 
@@ -12,5 +13,6 @@ import java.util.List;
 
 public interface PersonRepository extends JpaRepository<Person,Long>{
     Optional<Person> findByUuid(UUID uuid);
-    List<Person> findByName(String name);
+    @Query("SELECT p FROM Person p WHERE lower(p.name) like lower(concat('%', :name,'%'))")
+    List<Person> findByNameIgnoreCaseContaining(String name);
 }
