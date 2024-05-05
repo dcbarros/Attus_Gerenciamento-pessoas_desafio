@@ -12,6 +12,7 @@ Foi utilizado para realizar a API:
 
 - Java 21;
 - Banco H2, mas testei ele também no PostgreSQL 16;
+- SpringBoot 3.2.5
 
 ## Instruções 
 
@@ -151,3 +152,11 @@ GET:http://localhost:8080/address/v1/person/{uuid}/address/{cep}
 
 - uuid = uuid da pessoa;
 - cep = CEP que quer buscar na lista.
+
+## Melhoramento:
+
+Alguns pontos para um futuro melhoramento:
+
+1. Adicionar uma classe para o tratamento de erros, não deixando os erros gerados deixem expor o uso do springboot para o usuário;
+2. Elaboração de testes unitários para melhorar a robustes da aplicação;
+3. Criação de um container docker para facilitar um futuro deploy;
