@@ -21,8 +21,9 @@ Acesso ao console do banco:
 
 >http://localhost:8080/h2-console
 
-user: pessoas;
-password: pessoas;
+Parâmetros do banco:
+- user: pessoas;
+- password: pessoas;
 
 Acesso aos SWAGGER:
 
@@ -36,7 +37,7 @@ GET:http://localhost:8080/person/v1/{uuid}
 ```
 ### Parâmetros:
 
-uuid = uuid da pessoa que quer buscar;
+- uuid = uuid da pessoa que quer buscar;
 
 ### Edita dados da pessoa.
 ```
@@ -44,14 +45,15 @@ PUT:http://localhost:8080/person/v1/{uuid}
 ```
 ### Parâmetros:
 
-uuid = uuid da pessoa que quer editar;
+- uuid = uuid da pessoa que quer editar;
 
 ### Corpo de Requisição:
-
+```
 {
   "name": "string",
   "birthday": "2024-05-05"
 }
+```
 
 ### Adiciona pessoa.
 ```
@@ -59,7 +61,7 @@ POST:http://localhost:8080/person/v1
 ```
 
 ### Corpo de Requisição:
-
+```
 {
   "name": "string",
   "birthday": "2024-05-05",
@@ -71,6 +73,7 @@ POST:http://localhost:8080/person/v1
     "state": "string"
   }
 }
+```
 
 ### Busca pessoas com o nome ou que contenham nome.
 ```
@@ -78,7 +81,7 @@ GET:http://localhost:8080/person/v1/list?name={name}
 ```
 ### Parâmetros:
 
-name = nome completo ou fragmento;
+- name = nome completo ou fragmento;
 
 ### Altera endereço da pessoa.
 ```
@@ -86,11 +89,11 @@ PUT:http://localhost:8080/address/v1/person/{uuid}/old-cep/{cep}
 ```
 ### Parâmetros:
 
-uuid = uuid da pessoa;
-cep = CEP cadastrado na plataforma;
+- uuid = uuid da pessoa;
+- cep = CEP cadastrado na plataforma;
 
 ### Corpo de Requisição:
-
+```
 {
   "cep": "string",
   "publicPlace": "string",
@@ -98,6 +101,7 @@ cep = CEP cadastrado na plataforma;
   "city": "string",
   "state": "string"
 }
+```
 
 ### Adiciona endereço a lista da pessoa, sempre sendo como não principal.
 ```
@@ -105,10 +109,10 @@ PATCH:http://localhost:8080/address/v1/person/{uuid}
 ```
 ### Parâmetros:
 
-uuid = uuid da pessoa;
+- uuid = uuid da pessoa;
 
 ### Corpo de Requisição:
-
+```
 [
   {
     "cep": "string",
@@ -118,6 +122,7 @@ uuid = uuid da pessoa;
     "state": "string"
   }
 ]
+```
 
 ### Muda o endereço principal da pessoa.
 ```
@@ -125,8 +130,8 @@ PATCH:http://localhost:8080/address/v1/person/new-principal-cep/{cep}
 ```
 ### Parâmetros:
 
-uuid = uuid da pessoa;
-cep = CEP do endereço principal, que deve conter na lista dos endereços da pessoa.
+- uuid = uuid da pessoa;
+- cep = CEP do endereço principal, que deve conter na lista dos endereços da pessoa.
 
 ### Busca lista de endereços da pessoa.
 ```
@@ -135,7 +140,7 @@ GET:http://localhost:8080/address/v1/person?uuid={uuid}
 
 ### Parâmetros:
 
-uuid = uuid da pessoa;
+- uuid = uuid da pessoa;
 
 ### Busca endereço da pessoa.
 ```
@@ -144,5 +149,5 @@ GET:http://localhost:8080/address/v1/person/{uuid}/address/{cep}
 
 ### Parâmetros:
 
-uuid = uuid da pessoa;
-cep = CEP que quer buscar na lista.
+- uuid = uuid da pessoa;
+- cep = CEP que quer buscar na lista.
